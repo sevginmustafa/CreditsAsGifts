@@ -1,11 +1,13 @@
 ﻿namespace CreditsAsGifts.Infrastructure.Extensions
 {
     using CreditsAsGifts.Data;
+    using CreditsAsGifts.Data.Models;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using System;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -20,7 +22,7 @@
             var services = serviceScope.ServiceProvider;
 
             var database = services.GetRequiredService<CreditsAsGiftsDbContext>();
-            var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
             await MigrateDatabaseAsync(database);
@@ -28,6 +30,7 @@
             await SeedRoleAsync(roleManager, AdministratorRoleName);
             await SeedRoleAsync(roleManager, UserRoleName);
             await SeedAdministratorAsync(userManager);
+            await SeedPrivacyAsync(database);
 
             return app;
         }
@@ -52,11 +55,11 @@
             }
         }
 
-        private static async Task SeedAdministratorAsync(UserManager<IdentityUser> userManager)
+        private static async Task SeedAdministratorAsync(UserManager<ApplicationUser> userManager)
         {
             if (!userManager.Users.Any(x => x.UserName == AdministratorUsername))
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = AdministratorUsername,
                     Email = AdministratorEmail,
@@ -73,6 +76,23 @@
                 {
                     throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
                 }
+            }
+        }
+
+        private static async Task SeedPrivacyAsync(CreditsAsGiftsDbContext database)
+        {
+            const string privacyPath = "./wwwroot/privacy.txt";
+
+            if (!database.Privacies.Any())
+            {
+                var privacy = new Privacy
+                {
+                    Content = await File.ReadAllTextAsync(privacyPath),
+                };
+
+                await database.Privacies.AddAsync(privacy);
+
+                await database.SaveChangesAsync();
             }
         }
     }

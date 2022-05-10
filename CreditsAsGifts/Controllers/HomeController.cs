@@ -1,4 +1,5 @@
 ﻿using CreditsAsGifts.Models;
+using CreditsAsGifts.Services.Privacy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +12,11 @@ namespace CreditsAsGifts.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IPrivacyService privacyService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IPrivacyService privacyService)
         {
-            _logger = logger;
+            this.privacyService = privacyService;
         }
 
         public IActionResult Index()
@@ -23,9 +24,9 @@ namespace CreditsAsGifts.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            return View(await this.privacyService.GetPrivacyAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

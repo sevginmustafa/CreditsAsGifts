@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditsAsGifts.Data.Migrations
 {
     [DbContext(typeof(CreditsAsGiftsDbContext))]
-    [Migration("20220509233850_InitialCreate")]
+    [Migration("20220510155313_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,22 @@ namespace CreditsAsGifts.Data.Migrations
                     b.HasIndex("RecipientId");
 
                     b.ToTable("GiftsSended");
+                });
+
+            modelBuilder.Entity("CreditsAsGifts.Data.Models.Privacy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Privacies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

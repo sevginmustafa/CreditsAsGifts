@@ -1,5 +1,8 @@
 using CreditsAsGifts.Data;
+using CreditsAsGifts.Data.Models;
 using CreditsAsGifts.Infrastructure.Extensions;
+using CreditsAsGifts.Services.Privacy;
+using CreditsAsGifts.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +38,7 @@ namespace CreditsAsGifts
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
@@ -44,6 +48,11 @@ namespace CreditsAsGifts
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CreditsAsGiftsDbContext>();
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IPrivacyService, PrivacyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

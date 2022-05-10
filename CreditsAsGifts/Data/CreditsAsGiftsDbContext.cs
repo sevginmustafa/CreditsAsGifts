@@ -18,6 +18,8 @@ namespace CreditsAsGifts.Data
 
         public DbSet<GiftSended> GiftsSended { get; set; }
 
+        public DbSet<Privacy> Privacies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = builder.Model.GetEntityTypes().ToList();
