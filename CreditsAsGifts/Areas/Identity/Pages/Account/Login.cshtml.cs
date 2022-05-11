@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using CreditsAsGifts.Data.Models;
 
+using static CreditsAsGifts.Common.ModelValidation;
+
 namespace CreditsAsGifts.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -18,7 +20,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, 
+        public LoginModel(SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger)
         {
             this.signInManager = signInManager;
@@ -37,7 +39,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Display(Name = "Username")]
+            [Display(Name = UsernameDisplayName)]
             [Required]
             public string UserName { get; set; }
 
@@ -45,7 +47,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = RememberMeDisplayName)]
             public bool RememberMe { get; set; }
         }
 
@@ -71,7 +73,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout

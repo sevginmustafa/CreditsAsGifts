@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using CreditsAsGifts.Data.Models;
 
+using static CreditsAsGifts.Common.ModelValidation;
+
 namespace CreditsAsGifts.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -29,8 +31,8 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = EmailRequiredMessage)]
+            [DataType(DataType.EmailAddress, ErrorMessage = EmailInvalidErrorMessage)]
             public string Email { get; set; }
         }
 

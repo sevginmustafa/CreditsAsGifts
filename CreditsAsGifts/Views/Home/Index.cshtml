@@ -13,22 +13,22 @@
     <div class="card">
         <img class="card-img-top" src="~/images/gift_of_giving.jpg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">The gift of giving</h5>
-            <p class="card-text">Here every registered user is free to send gifts in the form of online loans.</p>
+            <h5 class="card-title font-weight-bold font-italic" style="color:darkred">The gift of giving</h5>
+            <p class="card-text font-italic">Every registered user can send gifts in the form of online credits.</p>
         </div>
     </div>
     <div class="card">
         <img class="card-img-top" src="~/images/send_a_wish.jpg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">Send a wish</h5>
-            <p class="card-text">In addition, he will have the opportunity to write a wish as a comment.</p>
+            <h5 class="card-title font-weight-bold font-italic" style="color:green">Send a wish</h5>
+            <p class="card-text font-italic" >In addition, you will have the opportunity to send a wish as a comment.</p>
         </div>
     </div>
     <div class="card">
         <img class="card-img-top" src="~/images/one_click_away.jpg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">Few clicks away</h5>
-            <p class="card-text"> All this can be done just by writing the phone number of the recipient with whom he registered in the system.</p>
+            <h5 class="card-title font-weight-bold font-italic"style="color:darkblue">Few clicks away</h5>
+            <p class="card-text font-italic"> All this can be done just by writing the phone number of the recipient.</p>
         </div>
     </div>
 </div>
@@ -40,7 +40,7 @@
         <div class="card">
             <div class="card-body text-dark">
                 <h5 class="card-title">Register now and get 100 credits.</h5>
-                <a href="#" class="btn btn-primary">Register</a>
+                <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="card">
             <div class="card-body text-dark">
                 <h5 class="card-title">Login if you already have an account.</h5>
-                <a href="#" class="btn btn-primary">Login</a>
+                <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
             </div>
         </div>
     </div>

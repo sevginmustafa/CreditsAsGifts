@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CreditsAsGifts.Services.Gifts;
 
 namespace CreditsAsGifts
 {
@@ -53,6 +54,7 @@ namespace CreditsAsGifts
 
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IPrivacyService, PrivacyService>();
+            services.AddTransient<IGiftsService, GiftsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

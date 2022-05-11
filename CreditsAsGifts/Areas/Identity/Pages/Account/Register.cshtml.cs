@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 using static CreditsAsGifts.Common.GlobalConstants;
+using static CreditsAsGifts.Common.ModelValidation;
 
 namespace CreditsAsGifts.Areas.Identity.Pages.Account
 {
@@ -51,31 +52,29 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Display(Name = "Username")]
-            [Required(ErrorMessage = "Username is required!")]
-            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long!", MinimumLength = 3)]
+            [Display(Name = UsernameDisplayName)]
+            [Required(ErrorMessage = UsernameRequiredMessage)]
+            [StringLength(UsernameMaxLength, ErrorMessage = UsernameLengthErrorMessage, MinimumLength = UsernameMinLength)]
             public string UserName { get; set; }
 
-            [Display(Name = "Email")]
-            [Required(ErrorMessage = "Email address is required!")]
-            [DataType(DataType.EmailAddress, ErrorMessage = "Invalid email address!")]
+            [Required(ErrorMessage = EmailRequiredMessage)]
+            [DataType(DataType.EmailAddress, ErrorMessage = EmailInvalidErrorMessage)]
             public string Email { get; set; }
 
-            [Display(Name = "Phone number")]
-            [Required(ErrorMessage = "Phone number is required!")]
-            [DataType(DataType.PhoneNumber, ErrorMessage = "Invalid phone number!")]
-            [RegularExpression(@"^(0[0-9]{9})$", ErrorMessage = "Invalid phone number! The phone number should start with 0 and should be 10 digits long!")]
+            [Display(Name = PhoneNumberDisplayName)]
+            [Required(ErrorMessage = PhoneNumberRequiredMessage)]
+            [DataType(DataType.PhoneNumber, ErrorMessage = PhoneNumberInvalidErrorMessage)]
+            [RegularExpression(@"^(0[0-9]{9})$", ErrorMessage = PhoneNumberLengthErrorMessage)]
             public string PhoneNumber { get; set; }
 
-            [Display(Name = "Password")]
-            [Required(ErrorMessage = "Password is required!")]
+            [Required(ErrorMessage = PasswordRequiredMessage)]
             [DataType(DataType.Password)]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long!", MinimumLength = 6)]
+            [StringLength(PasswordMaxLength, ErrorMessage = PasswordLengthErrorMessage, MinimumLength = PasswordMinLength)]
             public string Password { get; set; }
 
-            [Display(Name = "Confirm password")]
+            [Display(Name = ConfirmPasswordDisplayName)]
             [DataType(DataType.Password)]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match!")]
+            [Compare("Password", ErrorMessage = PasswordCompareErrorMessage)]
             public string ConfirmPassword { get; set; }
         }
 
