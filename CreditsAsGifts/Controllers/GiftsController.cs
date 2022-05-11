@@ -37,7 +37,7 @@
 
             await this.giftsService.SendGiftAsync(this.User.GetId(), inputModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

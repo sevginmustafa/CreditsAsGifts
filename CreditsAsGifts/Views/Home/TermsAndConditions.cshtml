@@ -1,0 +1,11 @@
+﻿@using CreditsAsGifts.Models.Privacy
+@model TermsAndConditionsViewModel
+
+@{
+    ViewData["Title"] = "Terms and Conditions";
+}
+
+<div>
+    <h1 class="text-center">@this.ViewData["Title"]</h1>
+    @Html.Raw(Model.SanitizedContent)
+</div>

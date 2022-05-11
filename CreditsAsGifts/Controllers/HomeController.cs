@@ -1,5 +1,8 @@
-﻿using CreditsAsGifts.Models;
+﻿using CreditsAsGifts.Data.Models;
+using CreditsAsGifts.Models;
 using CreditsAsGifts.Services.Privacy;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,12 +24,22 @@ namespace CreditsAsGifts.Controllers
 
         public IActionResult Index()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.RedirectToAction("Dashboard", "Users", new { area = "" });
+            }
+
             return View();
         }
 
-        public async Task<IActionResult> Privacy()
+        public async Task<IActionResult> PrivacyAsync()
         {
             return View(await this.privacyService.GetPrivacyAsync());
+        }
+
+        public async Task<IActionResult> TermsAndConditionsAsync()
+        {
+            return View(await this.privacyService.GetTermsAndConditionsAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

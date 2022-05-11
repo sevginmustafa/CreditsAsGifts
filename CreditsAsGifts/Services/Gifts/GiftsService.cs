@@ -40,7 +40,8 @@ namespace CreditsAsGifts.Services.Gifts
                 throw new ArgumentNullException();
             }
 
-            if (sender.Credits < inputModel.NumberOfCredits)
+            if (sender.Credits < inputModel.NumberOfCredits
+                || sender.PhoneNumber == inputModel.PhoneNumber)
             {
                 throw new ArgumentException();
             }

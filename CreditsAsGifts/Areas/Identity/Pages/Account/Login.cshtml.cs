@@ -70,7 +70,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Users/Dashboard");
 
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 

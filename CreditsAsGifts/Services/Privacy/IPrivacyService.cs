@@ -6,5 +6,7 @@
     public interface IPrivacyService
     {
         public Task<PrivacyViewModel> GetPrivacyAsync();
+
+        public Task<TermsAndConditionsViewModel> GetTermsAndConditionsAsync();
     }
 }

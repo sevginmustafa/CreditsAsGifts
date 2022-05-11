@@ -1,0 +1,34 @@
+﻿@inject CreditsAsGifts.Services.Gifts.IGiftsService GiftsService
+
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var currentCredits = await GiftsService.GetUserCurrentCreditsAsync(this.User.GetId());
+}
+
+<h1 class="text-center responsive-font-example dashboard-text">My Dashboard</h1>
+<h3 class="text-center responsive-font-example dashboard-credits-text">
+    Current Credits: @currentCredits <i class="fa fa-credit-card" style="color:green"></i>
+</h3>
+<hr />
+
+<div class="row">
+    <div class="image offset-lg-0 col-lg-6 offset-sm-3 col-sm-10">
+        <img class="image__img" src="/images/send_gift.jpg" alt="Gift">
+        <a asp-controller="Gifts" asp-action="SendGift">
+            <div class="image__overlay gift">
+                <div class="image__title">Send Gift</div>
+                <p class="image__description">
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="image offset-lg-0 col-lg-6 offset-sm-3 col-sm-10">
+        <img class="image__img" src="/images/my_transactions2.jpg" alt="Transactions">
+        <div class="image__overlay transactions">
+            <div class="image__title">My Transactions</div>
+            <p class="image__description">
+            </p>
+        </div>
+    </div>
+</div>

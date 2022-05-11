@@ -9,6 +9,8 @@
         public MappingProfile()
         {
             this.CreateMap<Privacy, PrivacyViewModel>();
+
+            this.CreateMap<TermsAndConditions, TermsAndConditionsViewModel>();
         }
     }
 }

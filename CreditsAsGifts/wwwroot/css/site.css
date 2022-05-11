@@ -70,14 +70,6 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-/*.layoutBackground {
-    background: url("https://marketplace.canva.com/EAD2962NKnQ/2/0/1600w/canva-rainbow-gradient-pink-and-purple-zoom-virtual-background-_Tcjok-d9b4.jpg") no-repeat center center;
-}
-
-.navbar-custom {
-    background-color: red !important;
-}*/
-
 .footer-basic {
     padding: 25px 0px 0px 0px;
     background-color: #ffffff;
@@ -137,4 +129,94 @@ body {
         color: #aaa;
         margin-bottom: 0;
     }
+
+
+.dashboard-text {
+    color: darkred;
+    font-weight: 700;
+    font-family: cursive;
+}
+
+.dashboard-credits-text {
+    color: darkred;
+    font-weight: 500;
+    font-family: cursive;
+}
+
+.image {
+    position: relative;
+    width: 400px;
+}
+
+.image__img {
+    display: block;
+    width: 100%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.image__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.image__overlay_nohover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.25s;
+}
+
+.image__overlay.gift {
+    color: orchid;
+    font-family:cursive;
+}
+
+.image__overlay.transactions {
+    color: #1c9e74;
+    font-family: cursive;
+}
+
+
+.image__overlay--blur {
+    backdrop-filter: blur(5px);
+}
+
+.image__overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.image__overlay:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.image__title {
+    font-size: 2.5em;
+    font-weight: bold;
+    display: contents;
+}
+
+.image__description {
+    font-size: 1.25em;
+    margin-top: 0.25em;
+}
 

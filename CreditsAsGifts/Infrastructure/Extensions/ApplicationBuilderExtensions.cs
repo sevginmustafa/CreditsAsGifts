@@ -31,6 +31,7 @@
             await SeedRoleAsync(roleManager, UserRoleName);
             await SeedAdministratorAsync(userManager);
             await SeedPrivacyAsync(database);
+            await SeedTermsAndConditionsAsync(database);
 
             return app;
         }
@@ -91,6 +92,23 @@
                 };
 
                 await database.Privacies.AddAsync(privacy);
+
+                await database.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedTermsAndConditionsAsync(CreditsAsGiftsDbContext database)
+        {
+            const string privacyPath = "./wwwroot/termsAndConditions.txt";
+
+            if (!database.TermsAndConditions.Any())
+            {
+                var termsAndConditions = new TermsAndConditions
+                {
+                    Content = await File.ReadAllTextAsync(privacyPath),
+                };
+
+                await database.TermsAndConditions.AddAsync(termsAndConditions);
 
                 await database.SaveChangesAsync();
             }

@@ -62,6 +62,19 @@ namespace CreditsAsGifts.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TermsAndConditions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TermsAndConditions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -286,6 +299,9 @@ namespace CreditsAsGifts.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Privacies");
+
+            migrationBuilder.DropTable(
+                name: "TermsAndConditions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

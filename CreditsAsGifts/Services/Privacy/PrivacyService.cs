@@ -22,5 +22,8 @@
 
         public async Task<PrivacyViewModel> GetPrivacyAsync()
             => mapper.Map<PrivacyViewModel>( await this.database.Privacies.FirstOrDefaultAsync());
+
+        public async Task<TermsAndConditionsViewModel> GetTermsAndConditionsAsync()
+             => mapper.Map<TermsAndConditionsViewModel>(await this.database.TermsAndConditions.FirstOrDefaultAsync());
     }
 }

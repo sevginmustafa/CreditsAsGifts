@@ -1,5 +1,4 @@
-﻿@using CreditsAsGifts.Infrastructure.Extensions
-@using CreditsAsGifts.Models.Gifts
+﻿@using CreditsAsGifts.Models.Gifts
 @model GiftSendInputModel
 @inject CreditsAsGifts.Services.Gifts.IGiftsService GiftsService
 
@@ -35,3 +34,15 @@
         </form>
     </div>
 </div>
+
+@section Scripts{
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "textarea",
+            plugins: [
+                "image paste table link code media"
+            ]
+        });
+    </script>
+}

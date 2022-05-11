@@ -20,6 +20,8 @@ namespace CreditsAsGifts.Data
 
         public DbSet<Privacy> Privacies { get; set; }
 
+        public DbSet<TermsAndConditions> TermsAndConditions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var entityTypes = builder.Model.GetEntityTypes().ToList();
