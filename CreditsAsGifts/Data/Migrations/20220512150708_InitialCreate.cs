@@ -49,6 +49,23 @@ namespace CreditsAsGifts.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Gifts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    From = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    To = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    NumberOfCredits = table.Column<int>(type: "int", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gifts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Privacies",
                 columns: table => new
                 {
@@ -180,50 +197,6 @@ namespace CreditsAsGifts.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "GiftsReceived",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumberOfCredits = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SenderId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GiftsReceived", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GiftsReceived_AspNetUsers_SenderId",
-                        column: x => x.SenderId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GiftsSended",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumberOfCredits = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RecipientId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GiftsSended", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GiftsSended_AspNetUsers_RecipientId",
-                        column: x => x.RecipientId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -262,16 +235,6 @@ namespace CreditsAsGifts.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GiftsReceived_SenderId",
-                table: "GiftsReceived",
-                column: "SenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GiftsSended_RecipientId",
-                table: "GiftsSended",
-                column: "RecipientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -292,10 +255,7 @@ namespace CreditsAsGifts.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GiftsReceived");
-
-            migrationBuilder.DropTable(
-                name: "GiftsSended");
+                name: "Gifts");
 
             migrationBuilder.DropTable(
                 name: "Privacies");

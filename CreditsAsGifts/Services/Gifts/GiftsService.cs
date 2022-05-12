@@ -46,28 +46,19 @@ namespace CreditsAsGifts.Services.Gifts
                 throw new ArgumentException();
             }
 
-            var giftSended = new GiftSended
+            var gift = new Gift
             {
-                Recipient = recipient,
+                Date = DateTime.UtcNow,
+                From = sender.PhoneNumber,
+                To = inputModel.PhoneNumber,
                 NumberOfCredits = inputModel.NumberOfCredits,
-                Comment = inputModel.Comment,
-                Date = DateTime.UtcNow
-            };
-
-            var giftReceived = new GiftReceived
-            {
-                Sender = sender,
-                NumberOfCredits = inputModel.NumberOfCredits,
-                Comment = inputModel.Comment,
-                Date = DateTime.UtcNow
+                Message = inputModel.Message
             };
 
             sender.Credits -= inputModel.NumberOfCredits;
             recipient.Credits += inputModel.NumberOfCredits;
 
-            await this.database.GiftsSended.AddAsync(giftSended);
-            await this.database.GiftsReceived.AddAsync(giftReceived);
-
+            await this.database.Gifts.AddAsync(gift);
             await this.database.SaveChangesAsync();
         }
     }

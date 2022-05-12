@@ -1,0 +1,47 @@
+﻿@using CreditsAsGifts.Models.Gifts
+@model IEnumerable<TransactionViewModel>
+
+@{
+    ViewData["Title"] = "My Transactions";
+
+    int counter = 1;
+}
+
+<h1 class="text-center responsive-font-example mytransactions-text">@ViewData["Title"]</h1>
+<h3 class="text-center responsive-font-example dashboard-credits-text">
+</h3>
+<hr />
+
+<table class="table align-middle mb-0 bg-white">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Sender' s Username</th>
+            <th scope="col">Sender' s Phone</th>
+            <th scope="col">Recipient' s Phone</th>
+            <th scope="col">Recipient' s Phone</th>
+            <th scope="col">Number of Credits</th>
+            <th scope="col">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@(counter++)</td>
+                <td>@transaction.Date</td>
+                <td>@transaction.SenderUserName</td>
+                <td>@transaction.SenderPhoneNumber</td>
+                <td>@transaction.RecipientUserName</td>
+                <td>@transaction.RecipientPhoneNumber</td>
+                <td>@transaction.NumberOfCredits</td>
+                @if (@transaction.Message != null)
+                {
+                    <td><button type="button" class="btn-sm button1" data-mdb-ripple-color="dark">Open</button></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

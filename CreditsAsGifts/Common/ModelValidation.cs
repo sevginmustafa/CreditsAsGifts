@@ -27,7 +27,7 @@
         public const string PasswordCompareErrorMessage = "The password and confirmation password do not match!";
 
         public const string NumberOfCreditsDisplayName = "Number of credits you want to send";
-        public const string CommentGiftSendDisplayName = "Send a message or write a wish";
+        public const string MessageGiftSendDisplayName = "Send a message or write a wish";
         public const string RecipientPhoneNumberDisplayName = "Phone number of the recipient";
     }
 }

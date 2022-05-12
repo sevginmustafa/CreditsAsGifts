@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using CreditsAsGifts.Data.Models;
+    using CreditsAsGifts.Models.Gifts;
     using CreditsAsGifts.Models.Privacy;
 
     public class MappingProfile : Profile
@@ -11,6 +12,8 @@
             this.CreateMap<Privacy, PrivacyViewModel>();
 
             this.CreateMap<TermsAndConditions, TermsAndConditionsViewModel>();
+
+            this.CreateMap<Gift, TransactionViewModel>();
         }
     }
 }

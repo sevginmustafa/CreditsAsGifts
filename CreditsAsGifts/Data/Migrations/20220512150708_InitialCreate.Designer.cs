@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditsAsGifts.Data.Migrations
 {
     [DbContext(typeof(CreditsAsGiftsDbContext))]
-    [Migration("20220511232421_InitialCreate")]
+    [Migration("20220512150708_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,58 +21,35 @@ namespace CreditsAsGifts.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CreditsAsGifts.Data.Models.GiftReceived", b =>
+            modelBuilder.Entity("CreditsAsGifts.Data.Models.Gift", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfCredits")
                         .HasColumnType("int");
 
-                    b.Property<string>("SenderId")
+                    b.Property<string>("To")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("GiftsReceived");
-                });
-
-            modelBuilder.Entity("CreditsAsGifts.Data.Models.GiftSended", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumberOfCredits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RecipientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipientId");
-
-                    b.ToTable("GiftsSended");
+                    b.ToTable("Gifts");
                 });
 
             modelBuilder.Entity("CreditsAsGifts.Data.Models.Privacy", b =>
@@ -322,28 +299,6 @@ namespace CreditsAsGifts.Data.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("CreditsAsGifts.Data.Models.GiftReceived", b =>
-                {
-                    b.HasOne("CreditsAsGifts.Data.Models.ApplicationUser", "Sender")
-                        .WithMany("GiftsReceived")
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("CreditsAsGifts.Data.Models.GiftSended", b =>
-                {
-                    b.HasOne("CreditsAsGifts.Data.Models.ApplicationUser", "Recipient")
-                        .WithMany("GiftsSended")
-                        .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipient");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -393,13 +348,6 @@ namespace CreditsAsGifts.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CreditsAsGifts.Data.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("GiftsReceived");
-
-                    b.Navigation("GiftsSended");
                 });
 #pragma warning restore 612, 618
         }

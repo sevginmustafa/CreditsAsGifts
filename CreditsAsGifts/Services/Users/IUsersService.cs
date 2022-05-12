@@ -1,9 +1,15 @@
 ﻿namespace CreditsAsGifts.Services.Users
 {
+    using CreditsAsGifts.Models.Gifts;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IUsersService
     {
-        bool IsEmailAvailable(string email);
+        public bool IsEmailAvailable(string email);
 
-        bool isPhoneNumberAvailable(string phoneNumber);
+        public bool IsPhoneNumberAvailable(string phoneNumber);
+
+        public Task<IEnumerable<TransactionViewModel>> GetUserTransactionsAsync(string userId);
     }
 }

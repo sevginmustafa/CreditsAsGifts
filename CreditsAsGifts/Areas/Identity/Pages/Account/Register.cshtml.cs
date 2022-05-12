@@ -94,7 +94,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
                 {
                     this.ModelState.AddModelError("Email", $"Email address '{this.Input.Email}' is already taken.");
                 }
-                if (!this.usersService.isPhoneNumberAvailable(this.Input.PhoneNumber))
+                if (!this.usersService.IsPhoneNumberAvailable(this.Input.PhoneNumber))
                 {
                     this.ModelState.AddModelError("PhoneNumber", $"Phone number '{this.Input.PhoneNumber}' is already taken.");
                 }

@@ -14,9 +14,7 @@ namespace CreditsAsGifts.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
-        public DbSet<GiftReceived> GiftsReceived { get; set; }
-
-        public DbSet<GiftSended> GiftsSended { get; set; }
+        public DbSet<Gift> Gifts { get; set; }
 
         public DbSet<Privacy> Privacies { get; set; }
 

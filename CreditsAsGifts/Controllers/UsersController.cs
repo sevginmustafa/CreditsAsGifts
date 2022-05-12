@@ -1,4 +1,6 @@
 ﻿using CreditsAsGifts.Data.Models;
+using CreditsAsGifts.Infrastructure.Extensions;
+using CreditsAsGifts.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +14,12 @@ namespace CreditsAsGifts.Controllers
     public class UsersController : Controller
     {
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IUsersService usersService;
 
-        public UsersController(SignInManager<ApplicationUser> signInManager)
+        public UsersController(SignInManager<ApplicationUser> signInManager, IUsersService usersService)
         {
             this.signInManager = signInManager;
+            this.usersService = usersService;
         }
 
         [Authorize]
@@ -30,6 +34,12 @@ namespace CreditsAsGifts.Controllers
         public IActionResult Dashboard()
         {
             return this.View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyTransactionsAsync()
+        {
+            return this.View(await this.usersService.GetUserTransactionsAsync(this.User.GetId()));
         }
     }
 }

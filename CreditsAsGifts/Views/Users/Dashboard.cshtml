@@ -25,10 +25,12 @@
     </div>
     <div class="image offset-lg-0 col-lg-6 offset-sm-3 col-sm-10">
         <img class="image__img" src="/images/my_transactions2.jpg" alt="Transactions">
-        <div class="image__overlay transactions">
-            <div class="image__title">My Transactions</div>
-            <p class="image__description">
-            </p>
-        </div>
+        <a asp-controller="Users" asp-action="MyTransactions">
+            <div class="image__overlay transactions">
+                <div class="image__title">My Transactions</div>
+                <p class="image__description">
+                </p>
+            </div>
+        </a>
     </div>
 </div>

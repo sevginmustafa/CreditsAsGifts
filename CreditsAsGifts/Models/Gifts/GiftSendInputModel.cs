@@ -18,7 +18,7 @@ namespace CreditsAsGifts.Models.Gifts
         [Display(Name = NumberOfCreditsDisplayName)]
         public int NumberOfCredits { get; set; }
 
-        [Display(Name = CommentGiftSendDisplayName)]
-        public string Comment { get; set; }
+        [Display(Name = MessageGiftSendDisplayName)]
+        public string Message { get; set; }
     }
 }
