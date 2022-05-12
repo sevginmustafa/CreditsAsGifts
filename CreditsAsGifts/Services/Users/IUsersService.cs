@@ -10,6 +10,8 @@
 
         public bool IsPhoneNumberAvailable(string phoneNumber);
 
+        public Task<string> GetUserPhoneNumberAsync(string userId);
+
         public Task<IEnumerable<TransactionViewModel>> GetUserTransactionsAsync(string userId);
     }
 }

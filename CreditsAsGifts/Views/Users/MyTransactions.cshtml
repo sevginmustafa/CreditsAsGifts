@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "My Transactions";
 
+    string userPhoneNumber = this.ViewData["UserPhoneNumber"].ToString();
+
     int counter = 1;
 }
 
@@ -28,7 +30,7 @@
     <tbody>
         @foreach (var transaction in Model)
         {
-            <tr>
+            <tr class="@(transaction.SenderPhoneNumber == userPhoneNumber ? "text-danger" : "")">
                 <td>@(counter++)</td>
                 <td>@transaction.Date</td>
                 <td>@transaction.SenderUserName</td>
@@ -38,10 +40,57 @@
                 <td>@transaction.NumberOfCredits</td>
                 @if (@transaction.Message != null)
                 {
-                    <td><button type="button" class="btn-sm button1" data-mdb-ripple-color="dark">Open</button></td>
+                    <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm button1" data-toggle="modal" data-target="#exampleModal">Open</button></td>
                 }
             </tr>
         }
     </tbody>
 </table>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+
+    <script>
+        function openMessage() {
+            let buttons = document.querySelectorAll('#message');
+
+            for (const button of buttons) {
+                button.addEventListener('click', onclick);
+            }
+
+            function onclick(ev) {
+                console.log(ev.target.textContent)
+
+                let parentElement = ev.target.parentElement;
+
+                let message = parentElement.getAttribute('data-content');
+
+                let modalBody = document.querySelector('.modal-body');
+
+                modalBody.querySelector('textarea').textContent = message;
+            }
+        }
+
+        openMessage();
+    </script>
+}

@@ -24,11 +24,6 @@ namespace CreditsAsGifts.Controllers
 
         public IActionResult Index()
         {
-            if (this.User.Identity.IsAuthenticated)
-            {
-                return this.RedirectToAction("Dashboard", "Users", new { area = "" });
-            }
-
             return View();
         }
 

@@ -39,6 +39,9 @@ namespace CreditsAsGifts.Controllers
         [Authorize]
         public async Task<IActionResult> MyTransactionsAsync()
         {
+            this.ViewData["UserPhoneNumber"] = await this.usersService
+                .GetUserPhoneNumberAsync(this.User.GetId());
+
             return this.View(await this.usersService.GetUserTransactionsAsync(this.User.GetId()));
         }
     }

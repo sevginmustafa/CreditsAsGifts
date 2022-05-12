@@ -53,5 +53,12 @@
 
             return transactions;
         }
+
+        public async Task<string> GetUserPhoneNumberAsync(string userId)
+        {
+            var user = await this.database.ApplicationUsers.FindAsync(userId);
+
+            return user.PhoneNumber;
+        }
     }
 }

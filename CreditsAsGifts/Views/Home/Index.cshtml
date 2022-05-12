@@ -21,13 +21,13 @@
         <img class="card-img-top" src="~/images/send_a_wish.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title font-weight-bold font-italic" style="color:green">Send a wish</h5>
-            <p class="card-text font-italic" >In addition, you will have the opportunity to send a wish as a comment.</p>
+            <p class="card-text font-italic">In addition, you will have the opportunity to send a wish as a comment.</p>
         </div>
     </div>
     <div class="card">
         <img class="card-img-top" src="~/images/one_click_away.jpg" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title font-weight-bold font-italic"style="color:darkblue">Few clicks away</h5>
+            <h5 class="card-title font-weight-bold font-italic" style="color:darkblue">Few clicks away</h5>
             <p class="card-text font-italic"> All this can be done just by writing the phone number of the recipient.</p>
         </div>
     </div>
@@ -35,21 +35,24 @@
 
 <hr />
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body text-dark">
-                <h5 class="card-title">Register now and get 100 credits.</h5>
-                <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+@if (!this.User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Register now and get 100 credits.</h5>
+                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body text-dark">
+                    <h5 class="card-title">Login if you already have an account.</h5>
+                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body text-dark">
-                <h5 class="card-title">Login if you already have an account.</h5>
-                <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </div>
-        </div>
-    </div>
-</div>
+}

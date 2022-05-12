@@ -1,5 +1,6 @@
 ﻿namespace CreditsAsGifts.Models.Gifts
 {
+    using Ganss.XSS;
     using System;
 
     public class TransactionViewModel
