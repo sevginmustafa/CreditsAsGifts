@@ -51,7 +51,7 @@
                 });
             }
 
-            return transactions;
+            return transactions.OrderByDescending(x => x.Date);
         }
 
         public async Task<string> GetUserPhoneNumberAsync(string userId)
@@ -59,6 +59,19 @@
             var user = await this.database.ApplicationUsers.FindAsync(userId);
 
             return user.PhoneNumber;
+        }
+
+        public async Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(string searchString, string userId)
+        {
+            var allTransactions = await GetUserTransactionsAsync(userId);
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                return allTransactions
+                 .Where(x => x.SenderPhoneNumber.Contains(searchString) || x.RecipientPhoneNumber.Contains(searchString));
+            }
+
+            return allTransactions;
         }
     }
 }

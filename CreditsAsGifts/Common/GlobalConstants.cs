@@ -17,5 +17,7 @@
         public const string AdministratorPassword = "123456";
 
         public const string UserRoleName = "User";
+
+        public const int TransactionsCountPerPage = 10;
     }
 }

@@ -250,3 +250,45 @@ body {
         background-color: #4CAF50;
         color: white;
     }
+
+
+.pagination > li > a {
+    background-color: white;
+    color: forestgreen;
+}
+
+    .pagination > li > a:focus,
+    .pagination > li > a:hover,
+    .pagination > li > span:focus,
+    .pagination > li > span:hover {
+        color: white;
+        background-color: forestgreen;
+        border-color: forestgreen;
+    }
+
+.pagination > .active > a {
+    color: white;
+    background-color: forestgreen !Important;
+    border: solid 1px forestgreen !Important;
+}
+
+    .pagination > .active > a:hover {
+        color:white;
+        background-color: forestgreen !Important;
+        border: solid 1px forestgreen;
+    }
+
+
+.searchBar-text{
+    color:forestgreen;
+}
+
+.btn-outline-secondary {
+    color: forestgreen;
+    border-color: forestgreen;
+}
+
+    .btn-outline-secondary:hover {
+        color: white;
+        background-color: forestgreen;
+    }

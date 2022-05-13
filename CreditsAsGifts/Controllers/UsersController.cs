@@ -1,5 +1,7 @@
 ﻿using CreditsAsGifts.Data.Models;
 using CreditsAsGifts.Infrastructure.Extensions;
+using CreditsAsGifts.Models;
+using CreditsAsGifts.Models.Gifts;
 using CreditsAsGifts.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using static CreditsAsGifts.Common.GlobalConstants;
 
 namespace CreditsAsGifts.Controllers
 {
@@ -37,12 +41,24 @@ namespace CreditsAsGifts.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> MyTransactionsAsync()
+        public async Task<IActionResult> MyTransactionsAsync(string searchString, int page = 1)
         {
             this.ViewData["UserPhoneNumber"] = await this.usersService
                 .GetUserPhoneNumberAsync(this.User.GetId());
 
-            return this.View(await this.usersService.GetUserTransactionsAsync(this.User.GetId()));
+            var transactions = await this.usersService
+                .SearchTransactionsByPhoneNumberAsync(searchString, this.User.GetId());
+
+            var paginatedTransactions = PaginatedList<TransactionViewModel>.
+                Create(transactions, page, TransactionsCountPerPage);
+
+            var viewModel = new TransactionSearchViewModel
+            {
+                Transactions = paginatedTransactions,
+                SearchString = searchString
+            };
+
+            return this.View(viewModel);
         }
     }
 }
