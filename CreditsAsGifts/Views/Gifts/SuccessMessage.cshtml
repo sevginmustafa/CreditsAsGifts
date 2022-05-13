@@ -1,0 +1,20 @@
+﻿@{
+    this.ViewData["Title"] = "Success Message";
+
+}
+
+<br />
+<div class="container-fluid text-center">
+    <h1 class="display-4 successMessage"><span>Thank you for using our site!</span></h1>
+    <br />
+    <h4 class="successMessage">Your gift was successfully sent to the user with the phone number you wrote.</h4>
+    <img src="~/images//giftSent.gif" style="width:110px;" />
+    <br />
+    <br />
+    <h4 class="successMessage">Keep your work.</h4>
+    <br />
+    <p class="lead">
+        <a class="btn btn-info btn-lg" asp-controller="Users" asp-action="Dashboard" role="button">Go to Dashboard</a>
+        <a class="btn btn-danger btn-lg" asp-controller="Gifts" asp-action="SendGift" role="button">Send another gift</a>
+    </p>
+</div>

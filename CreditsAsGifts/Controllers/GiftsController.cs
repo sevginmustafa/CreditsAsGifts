@@ -35,9 +35,26 @@
                 return this.View(inputModel);
             }
 
-            await this.giftsService.SendGiftAsync(this.User.GetId(), inputModel);
+            try
+            {
+                await this.giftsService.SendGiftAsync(this.User.GetId(), inputModel);
+            }
+            catch (Exception)
+            {
+                return this.RedirectToAction(nameof(UnsuccessMessage));
+            }
 
             return this.RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        public IActionResult SuccessMessage()
+        {
+            return this.View();
+        }
+
+        public IActionResult UnsuccessMessage()
+        {
+            return this.View();
         }
     }
 }

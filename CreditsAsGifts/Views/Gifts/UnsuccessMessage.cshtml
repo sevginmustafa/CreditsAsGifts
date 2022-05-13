@@ -1,0 +1,23 @@
+﻿@{
+    this.ViewData["Title"] = "Unsuccess Message";
+
+}
+
+<br />
+<div class="container-fluid text-center">
+    <h1 class="display-4 unsuccessMessage"><span>Something went wrong!</span></h1>
+    <br />
+    <h4 class="unsuccessMessage">Your gift was not sent successfully!</h4>
+    <img src="~/images//errorGiftSent.gif" style="width:300px;" />
+    <hr />
+    <p class="lead unsuccessMessage text-left">Probable cause of the error:</p>
+    <p class="lead unsuccessMessage text-left"> - there is no user in the system with the phone number you specified;</p>
+    <p class="lead unsuccessMessage text-left">- you are trying to send a gift to yourself;</p>
+    <p class="lead unsuccessMessage text-left">- the credits you are trying to send are more than you currently have;</p>
+    
+    <br />
+    <br />
+    <p class="lead">
+        <a class="btn btn-danger btn-lg" asp-controller="Gifts" asp-action="SendGift" role="button">Try again</a>
+    </p>
+</div>
