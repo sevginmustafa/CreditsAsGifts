@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using CreditsAsGifts.Data.Models;
 
 using static CreditsAsGifts.Common.ModelValidation;
+using static CreditsAsGifts.Common.GlobalConstants;
 
 namespace CreditsAsGifts.Areas.Identity.Pages.Account
 {
@@ -68,9 +69,10 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null, string returnUrlAdmin = null)
         {
             returnUrl ??= Url.Content("~/Users/Dashboard");
+            returnUrlAdmin ??= Url.Content("~/Administration");
 
             ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -81,8 +83,16 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
                 var result = await signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    if (Input.UserName.ToLower() == AdministratorUsername.ToLower())
+                    {
+                        logger.LogInformation("Admin logged in.");
+                        return LocalRedirect(returnUrlAdmin);
+                    }
+                    else
+                    {
+                        logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

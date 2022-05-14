@@ -1,0 +1,116 @@
+﻿@using CreditsAsGifts.Models.Users
+@model UserSearchViewModel
+
+@{
+    ViewData["Title"] = "All Users";
+
+    int counter = 1;
+
+    if (Model.Users.PageNumber > 1)
+    {
+        counter = Model.Users.PageNumber * 10 - 9;
+    }
+}
+
+<h1 class="text-center responsive-font-example adminDashboard">@ViewData["Title"]</h1>
+<hr />
+
+<h5 class="adminSearchBar-text">SEARCH BY PHONE</h5>
+<form asp-action="GetAll" method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="searchString" class="form-control" placeholder="Search here..." value="@Model.SearchString">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondaryAdmin" type="submit" value="">Search</button>
+        </div>
+    </div>
+</form>
+
+<p>Results Returned: <span>@Model.Users.Count</span></p>
+<hr />
+
+<p><i>You can also type something in the input field below to filter the current page transactions:</i></p>
+<input id="myInput" type="text" placeholder="Username, email, credits...">
+<br>
+<br>
+
+<table class="table align-middle mb-0 bg-white text-center">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Credits</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@(counter++)</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Credits</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@if (Model.Users.TotalPages > 1)
+{
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.Users.HasPreviousPage) {<text>disabled</text>}">
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString">First</a>
+            </li>
+            <li class="page-item @if (!Model.Users.HasPreviousPage) {<text>disabled</text>}">
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Users.PreviousPage">Previous</a>
+            </li>
+            @for (int i = Model.Users.PageNumber - 3; i < Model.Users.PageNumber; i++)
+            {
+                if (i > 0)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item active">
+                <a class="page-link">
+                    @Model.Users.PageNumber
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            @for (int i = Model.Users.PageNumber + 1; i <= Model.Users.PageNumber + 3; i++)
+            {
+                if (i <= Model.Users.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item @if (!Model.Users.HasNextPage) {<text>disabled</text>}">
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Users.NextPage">Next</a>
+            </li>
+            <li class="page-item @if (!Model.Users.HasNextPage) {<text>disabled</text>}">
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Users.TotalPages">Last</a>
+            </li>
+        </ul>
+    </nav>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

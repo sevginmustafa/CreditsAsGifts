@@ -243,14 +243,25 @@ body {
     cursor: pointer;
 }
 
-.button1 {
+.btn-open-message {
     background-color: white;
     color: black;
     border: 2px solid #4CAF50;
 }
 
-    .button1:hover {
+    .btn-open-message:hover {
         background-color: #4CAF50;
+        color: white;
+    }
+
+.btn-del-user {
+    background-color: white;
+    color: black;
+    border: 2px solid #dc3545;
+}
+
+    .btn-del-user:hover {
+        background-color: #dc3545;
         color: white;
     }
 
@@ -296,6 +307,20 @@ body {
         background-color: forestgreen;
     }
 
+.adminSearchBar-text {
+    color: #0366d6;
+}
+
+.btn-outline-secondaryAdmin {
+    color: #0366d6;
+    border-color: #0366d6;
+}
+
+    .btn-outline-secondaryAdmin:hover {
+        color: white;
+        background-color: #0366d6;
+    }
+
 .successMessage {
     color: #e5583b;
     font-weight: 500;
@@ -304,6 +329,12 @@ body {
 
 .unsuccessMessage {
     color: #dc3545;
+    font-weight: 500;
+    font-family: cursive;
+}
+
+.adminDashboard {
+    color: #0366d6;
     font-weight: 500;
     font-family: cursive;
 }

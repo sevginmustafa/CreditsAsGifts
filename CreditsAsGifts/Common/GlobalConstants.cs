@@ -19,5 +19,7 @@
         public const string UserRoleName = "User";
 
         public const int TransactionsCountPerPage = 10;
+
+        public const int UsersCountPerPage = 10;
     }
 }

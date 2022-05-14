@@ -15,8 +15,6 @@
 }
 
 <h1 class="text-center responsive-font-example mytransactions-text">@ViewData["Title"]</h1>
-<h3 class="text-center responsive-font-example dashboard-credits-text">
-</h3>
 <hr />
 
 <h5 class="searchBar-text">SEARCH BY PHONE</h5>
@@ -30,7 +28,7 @@
 </form>
 
     <p>Results Returned: <span>@Model.Transactions.Count</span></p>
-<br />
+<hr />
 
 <p><i>You can also type something in the input field below to filter the current page transactions:</i></p>
 <input id="myInput" type="text" placeholder="Date, username, credits...">
@@ -65,7 +63,7 @@
                     <td>-@transaction.NumberOfCredits</td>
                     @if (@transaction.Message != null)
                     {
-                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm button1" data-toggle="modal" data-target="#exampleModal">Open</button></td>
+                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
                     }
                 </tr>
             }
@@ -81,7 +79,7 @@
                     <td>+@transaction.NumberOfCredits</td>
                     @if (@transaction.Message != null)
                     {
-                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm button1" data-toggle="modal" data-target="#exampleModal">Open</button></td>
+                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
                     }
                 </tr>
             }

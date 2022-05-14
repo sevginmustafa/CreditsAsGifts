@@ -44,7 +44,7 @@
                 return this.RedirectToAction(nameof(UnsuccessMessage));
             }
 
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.RedirectToAction(nameof(SuccessMessage));
         }
 
         public IActionResult SuccessMessage()

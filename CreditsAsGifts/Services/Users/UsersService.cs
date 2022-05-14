@@ -3,10 +3,13 @@
     using AutoMapper;
     using CreditsAsGifts.Data;
     using CreditsAsGifts.Models.Gifts;
+    using CreditsAsGifts.Models.Users;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using static CreditsAsGifts.Common.GlobalConstants;
 
     public class UsersService : IUsersService
     {
@@ -72,6 +75,24 @@
             }
 
             return allTransactions;
+        }
+
+        public IEnumerable<UserAdministrationViewModel> GetAllUsers()
+            => this.mapper
+            .Map<IEnumerable<UserAdministrationViewModel>>(this.database.ApplicationUsers
+                .Where(x => x.PhoneNumber != AdministratorPhoneNumber));
+
+        public IEnumerable<UserAdministrationViewModel> SearchUsersByPhoneNumber(string searchString)
+        {
+            var allUsers = GetAllUsers();
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                return allUsers
+                 .Where(x => x.PhoneNumber.Contains(searchString));
+            }
+
+            return allUsers.OrderBy(x => x.UserName);
         }
     }
 }
