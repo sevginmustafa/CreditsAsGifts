@@ -1,20 +1,18 @@
-﻿using CreditsAsGifts.Data.Models;
-using CreditsAsGifts.Infrastructure.Extensions;
-using CreditsAsGifts.Models;
-using CreditsAsGifts.Models.Gifts;
-using CreditsAsGifts.Services.Users;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using static CreditsAsGifts.Common.GlobalConstants;
-
-namespace CreditsAsGifts.Controllers
+﻿namespace CreditsAsGifts.Controllers
 {
+    using CreditsAsGifts.Common.Enums;
+    using CreditsAsGifts.Data.Models;
+    using CreditsAsGifts.Infrastructure.Extensions;
+    using CreditsAsGifts.Models;
+    using CreditsAsGifts.Models.Gifts;
+    using CreditsAsGifts.Services.Users;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+
+    using static CreditsAsGifts.Common.GlobalConstants;
+
     public class UsersController : Controller
     {
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -46,13 +44,13 @@ namespace CreditsAsGifts.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> MyTransactionsAsync(string searchString, int page = 1)
+        public async Task<IActionResult> MyTransactionsAsync(string searchString, int transactionType = 0, int page = 1)
         {
             this.ViewData["UserPhoneNumber"] = await this.usersService
                 .GetUserPhoneNumberAsync(this.User.GetId());
 
             var transactions = await this.usersService
-                .SearchTransactionsByPhoneNumberAsync(searchString, this.User.GetId());
+                .SearchTransactionsByPhoneNumberAsync(searchString, transactionType, this.User.GetId());
 
             var paginatedTransactions = PaginatedList<TransactionViewModel>.
                 Create(transactions, page, TransactionsCountPerPage);
@@ -60,7 +58,8 @@ namespace CreditsAsGifts.Controllers
             var viewModel = new TransactionSearchViewModel
             {
                 Transactions = paginatedTransactions,
-                SearchString = searchString
+                SearchString = searchString,
+                TransactionType = (TransactionType)transactionType
             };
 
             return this.View(viewModel);

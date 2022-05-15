@@ -1,5 +1,3 @@
-using System;
-
 namespace CreditsAsGifts.Models
 {
     public class ErrorViewModel

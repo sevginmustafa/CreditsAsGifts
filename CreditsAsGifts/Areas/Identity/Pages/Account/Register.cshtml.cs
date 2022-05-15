@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using CreditsAsGifts.Data.Models;
-using CreditsAsGifts.Services.Users;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
-
-using static CreditsAsGifts.Common.GlobalConstants;
-using static CreditsAsGifts.Common.ModelValidation;
-
-namespace CreditsAsGifts.Areas.Identity.Pages.Account
+﻿namespace CreditsAsGifts.Areas.Identity.Pages.Account
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+    using System.Text.Encodings.Web;
+    using System.Threading.Tasks;
+    using CreditsAsGifts.Data.Models;
+    using CreditsAsGifts.Services.Users;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.AspNetCore.WebUtilities;
+    using Microsoft.Extensions.Logging;
+
+    using static CreditsAsGifts.Common.GlobalConstants;
+    using static CreditsAsGifts.Common.ModelValidation;
+
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {

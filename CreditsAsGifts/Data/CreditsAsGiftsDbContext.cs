@@ -1,10 +1,10 @@
-﻿using CreditsAsGifts.Data.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-
-namespace CreditsAsGifts.Data
+﻿namespace CreditsAsGifts.Data
 {
+    using CreditsAsGifts.Data.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+
     public class CreditsAsGiftsDbContext : IdentityDbContext
     {
         public CreditsAsGiftsDbContext(DbContextOptions<CreditsAsGiftsDbContext> options)

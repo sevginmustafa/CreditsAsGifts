@@ -1,12 +1,10 @@
 ﻿namespace CreditsAsGifts.Areas.Administration.Controllers
 {
+    using CreditsAsGifts.Infrastructure.Extensions;
     using CreditsAsGifts.Models;
     using CreditsAsGifts.Models.Gifts;
     using CreditsAsGifts.Services.Users;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using static CreditsAsGifts.Common.GlobalConstants;
 

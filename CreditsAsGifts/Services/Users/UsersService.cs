@@ -30,12 +30,12 @@
 
         public async Task<IEnumerable<TransactionViewModel>> GetTransactionsAsync(string userId)
         {
+            var user = await this.database.ApplicationUsers.FindAsync(userId);
+
             var gifts = this.database.Gifts.ToList();
 
-            if (userId != null)
+            if (user != null)
             {
-                var user = await this.database.ApplicationUsers.FindAsync(userId);
-
                 gifts = gifts.Where(x => x.From == user.PhoneNumber || x.To == user.PhoneNumber).ToList();
             }
 
@@ -61,9 +61,23 @@
             return transactions.OrderByDescending(x => x.Date);
         }
 
-        public async Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(string searchString, string userId)
+        public async Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(
+            string searchString, int transactionType, string userId)
         {
-            var allTransactions = await GetTransactionsAsync(userId);
+            IEnumerable<TransactionViewModel> allTransactions = null;
+
+            if (transactionType == 1)
+            {
+                allTransactions = await GetIncomingTransactionsAsync(userId);
+            }
+            else if (transactionType == 2)
+            {
+                allTransactions = await GetOutgoingTransactionsAsync(userId);
+            }
+            else
+            {
+                allTransactions = await GetTransactionsAsync(userId);
+            }
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
@@ -97,6 +111,24 @@
             }
 
             return allUsers.OrderBy(x => x.UserName);
+        }
+
+        public async Task<IEnumerable<TransactionViewModel>> GetIncomingTransactionsAsync(string userId)
+        {
+            var transactions = await this.GetTransactionsAsync(userId);
+
+            var user = await this.database.ApplicationUsers.FindAsync(userId);
+
+            return transactions.Where(x => x.RecipientPhoneNumber == user.PhoneNumber);
+        }
+
+        public async Task<IEnumerable<TransactionViewModel>> GetOutgoingTransactionsAsync(string userId)
+        {
+            var transactions = await this.GetTransactionsAsync(userId);
+
+            var user = await this.database.ApplicationUsers.FindAsync(userId);
+
+            return transactions.Where(x => x.SenderPhoneNumber == user.PhoneNumber);
         }
     }
 }

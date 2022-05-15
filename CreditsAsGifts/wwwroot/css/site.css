@@ -254,14 +254,14 @@ body {
         color: white;
     }
 
-.btn-del-user {
+.btn-open-messageAdmin {
     background-color: white;
     color: black;
-    border: 2px solid #dc3545;
+    border: 2px solid #0366d6;
 }
 
-    .btn-del-user:hover {
-        background-color: #dc3545;
+    .btn-open-messageAdmin:hover {
+        background-color: #0366d6;
         color: white;
     }
 

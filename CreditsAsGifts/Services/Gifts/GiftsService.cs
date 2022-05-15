@@ -1,15 +1,13 @@
-﻿using AutoMapper;
-using CreditsAsGifts.Data;
-using CreditsAsGifts.Data.Models;
-using CreditsAsGifts.Models.Gifts;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CreditsAsGifts.Services.Gifts
+﻿namespace CreditsAsGifts.Services.Gifts
 {
+    using AutoMapper;
+    using CreditsAsGifts.Data;
+    using CreditsAsGifts.Data.Models;
+    using CreditsAsGifts.Models.Gifts;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Threading.Tasks;
+
     public class GiftsService : IGiftsService
     {
         private readonly CreditsAsGiftsDbContext database;

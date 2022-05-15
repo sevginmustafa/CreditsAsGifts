@@ -1,16 +1,12 @@
-﻿using CreditsAsGifts.Models;
-using CreditsAsGifts.Models.Users;
-using CreditsAsGifts.Services.Users;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using static CreditsAsGifts.Common.GlobalConstants;
-
-namespace CreditsAsGifts.Areas.Administration.Controllers
+﻿namespace CreditsAsGifts.Areas.Administration.Controllers
 {
+    using CreditsAsGifts.Models;
+    using CreditsAsGifts.Models.Users;
+    using CreditsAsGifts.Services.Users;
+    using Microsoft.AspNetCore.Mvc;
+
+    using static CreditsAsGifts.Common.GlobalConstants;
+
     public class UsersController : AdministrationController
     {
         private readonly IUsersService usersService;

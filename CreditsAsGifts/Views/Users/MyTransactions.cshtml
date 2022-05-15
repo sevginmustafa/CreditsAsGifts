@@ -1,4 +1,5 @@
-﻿@using CreditsAsGifts.Models.Gifts
+﻿@using CreditsAsGifts.Common.Enums
+@using CreditsAsGifts.Models.Gifts
 @model TransactionSearchViewModel
 
 @{
@@ -27,28 +28,41 @@
     </div>
 </form>
 
-    <p>Results Returned: <span>@Model.Transactions.Count</span></p>
+<p>Results Returned: <span>@Model.Transactions.Count</span></p>
 <hr />
 
-<p><i>You can also type something in the input field below to filter the current page transactions:</i></p>
-<input id="myInput" type="text" placeholder="Date, username, credits...">
-<br>
-<br>
+<ul class="nav nav-tabs nav-justified mb-3" id="ex1" role="tablist">
+    @foreach (TransactionType transactionType in Enum.GetValues(typeof(TransactionType)))
+    {
+        if (Model.TransactionType == transactionType)
+        {
+            <li class="nav-item">
+                <a class="nav-link active">@transactionType.ToString()</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)transactionType)" style="color:forestgreen">@transactionType.ToString()</a>
+            </li>
+        }
+    }
+</ul>
 
 <table class="table align-middle mb-0 bg-white text-center">
     <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Date</th>
-            <th scope="col">Sender' s Name</th>
-            <th scope="col">Sender' s Phone</th>
-            <th scope="col">Recipient' s Name</th>
-            <th scope="col">Recipient' s Phone</th>
+            <th scope="col">Sender Name</th>
+            <th scope="col">Sender Phone</th>
+            <th scope="col">Recipient Name</th>
+            <th scope="col">Recipient Phone</th>
             <th scope="col">Number of Credits</th>
             <th scope="col">Message</th>
         </tr>
     </thead>
-    <tbody id="myTable">
+    <tbody>
         @foreach (var transaction in Model.Transactions)
         {
             if (transaction.SenderPhoneNumber == userPhoneNumber)
@@ -93,17 +107,17 @@
     <nav aria-label="...">
         <ul class="pagination justify-content-center">
             <li class="page-item @if (!Model.Transactions.HasPreviousPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString">First</a>
+                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)">First</a>
             </li>
             <li class="page-item @if (!Model.Transactions.HasPreviousPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.PreviousPage">Previous</a>
+                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)" asp-route-page="@Model.Transactions.PreviousPage ">Previous</a>
             </li>
             @for (int i = Model.Transactions.PageNumber - 3; i < Model.Transactions.PageNumber; i++)
             {
                 if (i > 0)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
@@ -118,15 +132,15 @@
                 if (i <= Model.Transactions.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
             <li class="page-item @if (!Model.Transactions.HasNextPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.NextPage">Next</a>
+                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)" asp-route-page="@Model.Transactions.NextPage">Next</a>
             </li>
             <li class="page-item @if (!Model.Transactions.HasNextPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.TotalPages">Last</a>
+                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-transactionType="@((int)Model.TransactionType)" asp-route-page="@Model.Transactions.TotalPages">Last</a>
             </li>
         </ul>
     </nav>
@@ -177,16 +191,5 @@
         }
 
         openMessage();
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
     </script>
 }

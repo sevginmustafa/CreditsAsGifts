@@ -1,18 +1,11 @@
-﻿using CreditsAsGifts.Data.Models;
-using CreditsAsGifts.Models;
-using CreditsAsGifts.Services.Privacy;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CreditsAsGifts.Controllers
+﻿namespace CreditsAsGifts.Controllers
 {
+    using CreditsAsGifts.Models;
+    using CreditsAsGifts.Services.Privacy;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+
     public class HomeController : Controller
     {
         private readonly IPrivacyService privacyService;

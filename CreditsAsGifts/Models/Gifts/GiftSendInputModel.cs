@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using static CreditsAsGifts.Common.ModelValidation;
-
-namespace CreditsAsGifts.Models.Gifts
+﻿namespace CreditsAsGifts.Models.Gifts
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using static CreditsAsGifts.Common.ModelValidation;
+
     public class GiftSendInputModel
     {
         [Display(Name = RecipientPhoneNumberDisplayName)]

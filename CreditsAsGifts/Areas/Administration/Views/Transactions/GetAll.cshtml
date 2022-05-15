@@ -13,15 +13,15 @@
 }
 
 
-<h1 class="text-center responsive-font-example mytransactions-text">@ViewData["Title"]</h1>
+<h1 class="text-center responsive-font-example adminDashboard">@ViewData["Title"]</h1>
 <hr />
 
-<h5 class="searchBar-text">SEARCH BY PHONE</h5>
+<h5 class="adminDashboard">SEARCH BY PHONE</h5>
 <form asp-action="GetAll" method="get">
     <div class="input-group mb-3">
         <input type="text" name="searchString" class="form-control" placeholder="Search here..." value="@Model.SearchString">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" value="">Search</button>
+            <button class="btn btn-outline-secondaryAdmin" type="submit" value="">Search</button>
         </div>
     </div>
 </form>
@@ -39,10 +39,10 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Date</th>
-            <th scope="col">Sender' s Name</th>
-            <th scope="col">Sender' s Phone</th>
-            <th scope="col">Recipient' s Name</th>
-            <th scope="col">Recipient' s Phone</th>
+            <th scope="col">Sender Name</th>
+            <th scope="col">Sender Phone</th>
+            <th scope="col">Recipient Name</th>
+            <th scope="col">Recipient Phone</th>
             <th scope="col">Number of Credits</th>
             <th scope="col">Message</th>
         </tr>
@@ -60,7 +60,7 @@
                 <td>@transaction.NumberOfCredits</td>
                 @if (@transaction.Message != null)
                 {
-                    <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
+                    <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-messageAdmin" data-toggle="modal" data-target="#exampleModal">Open</button></td>
                 }
             </tr>
         }

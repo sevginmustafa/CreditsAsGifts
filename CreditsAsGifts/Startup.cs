@@ -1,27 +1,20 @@
-using CreditsAsGifts.Data;
-using CreditsAsGifts.Data.Models;
-using CreditsAsGifts.Infrastructure.Extensions;
-using CreditsAsGifts.Services.Privacy;
-using CreditsAsGifts.Services.Users;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CreditsAsGifts.Services.Gifts;
-using Microsoft.AspNetCore.Localization;
-
 namespace CreditsAsGifts
 {
+    using CreditsAsGifts.Data;
+    using CreditsAsGifts.Data.Models;
+    using CreditsAsGifts.Infrastructure.Extensions;
+    using CreditsAsGifts.Services.Privacy;
+    using CreditsAsGifts.Services.Users;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using CreditsAsGifts.Services.Gifts;
+    using Microsoft.AspNetCore.Localization;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
