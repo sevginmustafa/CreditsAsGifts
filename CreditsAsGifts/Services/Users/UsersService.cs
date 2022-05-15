@@ -28,12 +28,16 @@
         public bool IsPhoneNumberAvailable(string phoneNumber)
             => !this.database.ApplicationUsers.Any(x => x.PhoneNumber == phoneNumber);
 
-        public async Task<IEnumerable<TransactionViewModel>> GetUserTransactionsAsync(string userId)
+        public async Task<IEnumerable<TransactionViewModel>> GetTransactionsAsync(string userId)
         {
-            var user = await this.database.ApplicationUsers.FindAsync(userId);
+            var gifts = this.database.Gifts.ToList();
 
-            var gifts = this.database.Gifts
-                .Where(x => x.From == user.PhoneNumber || x.To == user.PhoneNumber);
+            if (userId != null)
+            {
+                var user = await this.database.ApplicationUsers.FindAsync(userId);
+
+                gifts = gifts.Where(x => x.From == user.PhoneNumber || x.To == user.PhoneNumber).ToList();
+            }
 
             var transactions = new List<TransactionViewModel>();
 
@@ -45,9 +49,9 @@
                 transactions.Add(new TransactionViewModel
                 {
                     Date = gift.Date,
-                    SenderUserName = sender.UserName,
+                    SenderName = sender.FirstName + " " + sender.LastName,
                     SenderPhoneNumber = sender.PhoneNumber,
-                    RecipientUserName = recipient.UserName,
+                    RecipientName = recipient.FirstName + " " + recipient.LastName,
                     RecipientPhoneNumber = recipient.PhoneNumber,
                     NumberOfCredits = gift.NumberOfCredits,
                     Message = gift.Message
@@ -57,16 +61,9 @@
             return transactions.OrderByDescending(x => x.Date);
         }
 
-        public async Task<string> GetUserPhoneNumberAsync(string userId)
-        {
-            var user = await this.database.ApplicationUsers.FindAsync(userId);
-
-            return user.PhoneNumber;
-        }
-
         public async Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(string searchString, string userId)
         {
-            var allTransactions = await GetUserTransactionsAsync(userId);
+            var allTransactions = await GetTransactionsAsync(userId);
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
@@ -75,6 +72,13 @@
             }
 
             return allTransactions;
+        }
+
+        public async Task<string> GetUserPhoneNumberAsync(string userId)
+        {
+            var user = await this.database.ApplicationUsers.FindAsync(userId);
+
+            return user.PhoneNumber;
         }
 
         public IEnumerable<UserAdministrationViewModel> GetAllUsers()

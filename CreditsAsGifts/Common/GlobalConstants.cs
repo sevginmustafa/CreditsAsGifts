@@ -8,6 +8,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdministratorFirstName = "Sevgin";
+
+        public const string AdministratorLastName = "Mustafa";
+
         public const string AdministratorUsername = "Sevgin";
 
         public const string AdministratorEmail = "sevgin_6_1996@abv.bg";

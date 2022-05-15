@@ -7,7 +7,11 @@
     {
         public static string Users => "Users";
 
-        public static string UserNavClass(ViewContext viewContext) => PageNavClass(viewContext, Users);
+        public static string UserNavClass(ViewContext viewContext) => PageNavClass(viewContext, Users); 
+        
+        public static string Transactions => "Transactions";
+
+        public static string TransactionNavClass(ViewContext viewContext) => PageNavClass(viewContext, Transactions);
 
         protected static string PageNavClass(ViewContext viewContext, string page)
         {

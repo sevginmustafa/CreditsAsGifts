@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    this.ViewData["ActivePage"] = TransactionNavPages.Transactions;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills flex-column">
+                <li class="@TransactionNavPages.GetAllNavClass(ViewContext)"><a class="nav-link" asp-controller="Transactions" asp-action="GetAll">All Transactions</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -52,6 +52,16 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Display(Name = FirstNameDisplayName)]
+            [Required(ErrorMessage = FirstNameRequiredMessage)]
+            [StringLength(FirstNameMaxLength, ErrorMessage = FirstNameLengthErrorMessage, MinimumLength = FirstNameMinLength)]
+            public string FirstName { get; set; }
+
+            [Display(Name = LastNameDisplayName)]
+            [Required(ErrorMessage = LastNameRequiredMessage)]
+            [StringLength(LastNameMaxLength, ErrorMessage = LastNameLengthErrorMessage, MinimumLength = LastNameMinLength)]
+            public string LastName { get; set; }
+
             [Display(Name = UsernameDisplayName)]
             [Required(ErrorMessage = UsernameRequiredMessage)]
             [StringLength(UsernameMaxLength, ErrorMessage = UsernameLengthErrorMessage, MinimumLength = UsernameMinLength)]
@@ -86,7 +96,7 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Users/Dashboard");
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -100,7 +110,16 @@ namespace CreditsAsGifts.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, PhoneNumber = Input.PhoneNumber, Credits = 100 };
+                    var user = new ApplicationUser
+                    {
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        UserName = Input.UserName,
+                        Email = Input.Email,
+                        PhoneNumber = Input.PhoneNumber,
+                        Credits = 100
+                    };
+
                     var result = await userManager.CreateAsync(user, Input.Password);
                     if (result.Succeeded)
                     {

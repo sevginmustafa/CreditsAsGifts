@@ -62,6 +62,8 @@
             {
                 var user = new ApplicationUser
                 {
+                    FirstName = AdministratorFirstName,
+                    LastName = AdministratorLastName,
                     UserName = AdministratorUsername,
                     Email = AdministratorEmail,
                     PhoneNumber = AdministratorPhoneNumber

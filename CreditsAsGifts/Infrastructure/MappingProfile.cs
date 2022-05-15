@@ -16,7 +16,8 @@
 
             this.CreateMap<Gift, TransactionViewModel>();
 
-            this.CreateMap<ApplicationUser, UserAdministrationViewModel>();
+            this.CreateMap<ApplicationUser, UserAdministrationViewModel>()
+                .ForMember(x => x.FullName, opt => opt.MapFrom(x => x.FirstName + " " + x.LastName));
         }
     }
 }

@@ -2,9 +2,7 @@
 @model TransactionSearchViewModel
 
 @{
-    ViewData["Title"] = "My Transactions";
-
-    string userPhoneNumber = this.ViewData["UserPhoneNumber"].ToString();
+    ViewData["Title"] = "All Transactions";
 
     int counter = 1;
 
@@ -14,11 +12,12 @@
     }
 }
 
+
 <h1 class="text-center responsive-font-example mytransactions-text">@ViewData["Title"]</h1>
 <hr />
 
 <h5 class="searchBar-text">SEARCH BY PHONE</h5>
-<form asp-action="MyTransactions" method="get">
+<form asp-action="GetAll" method="get">
     <div class="input-group mb-3">
         <input type="text" name="searchString" class="form-control" placeholder="Search here..." value="@Model.SearchString">
         <div class="input-group-append">
@@ -27,7 +26,7 @@
     </div>
 </form>
 
-    <p>Results Returned: <span>@Model.Transactions.Count</span></p>
+<p>Results Returned: <span>@Model.Transactions.Count</span></p>
 <hr />
 
 <p><i>You can also type something in the input field below to filter the current page transactions:</i></p>
@@ -51,38 +50,19 @@
     <tbody id="myTable">
         @foreach (var transaction in Model.Transactions)
         {
-            if (transaction.SenderPhoneNumber == userPhoneNumber)
-            {
-                <tr class="text-danger">
-                    <td>@(counter++)</td>
-                    <td>@transaction.Date.ToString("dd MMM yyyy HH:mm")</td>
-                    <td>@transaction.SenderName</td>
-                    <td>@transaction.SenderPhoneNumber</td>
-                    <td>@transaction.RecipientName</td>
-                    <td>@transaction.RecipientPhoneNumber</td>
-                    <td>-@transaction.NumberOfCredits</td>
-                    @if (@transaction.Message != null)
-                    {
-                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
-                    }
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td>@(counter++)</td>
-                    <td>@transaction.Date.ToString("dd MMM yyyy HH:mm")</td>
-                    <td>@transaction.SenderName</td>
-                    <td>@transaction.SenderPhoneNumber</td>
-                    <td>@transaction.RecipientName</td>
-                    <td>@transaction.RecipientPhoneNumber</td>
-                    <td>+@transaction.NumberOfCredits</td>
-                    @if (@transaction.Message != null)
-                    {
-                        <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
-                    }
-                </tr>
-            }
+            <tr>
+                <td>@(counter++)</td>
+                <td>@transaction.Date.ToString("dd MMM yyyy HH:mm")</td>
+                <td>@transaction.SenderName</td>
+                <td>@transaction.SenderPhoneNumber</td>
+                <td>@transaction.RecipientName</td>
+                <td>@transaction.RecipientPhoneNumber</td>
+                <td>@transaction.NumberOfCredits</td>
+                @if (@transaction.Message != null)
+                {
+                    <td data-content="@transaction.Message"><button id="message" type="button" class="btn-sm btn-open-message" data-toggle="modal" data-target="#exampleModal">Open</button></td>
+                }
+            </tr>
         }
     </tbody>
 </table>
@@ -93,17 +73,17 @@
     <nav aria-label="...">
         <ul class="pagination justify-content-center">
             <li class="page-item @if (!Model.Transactions.HasPreviousPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString">First</a>
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString">First</a>
             </li>
             <li class="page-item @if (!Model.Transactions.HasPreviousPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.PreviousPage">Previous</a>
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.PreviousPage">Previous</a>
             </li>
             @for (int i = Model.Transactions.PageNumber - 3; i < Model.Transactions.PageNumber; i++)
             {
                 if (i > 0)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
@@ -118,15 +98,15 @@
                 if (i <= Model.Transactions.TotalPages)
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@i">@i</a>
                     </li>
                 }
             }
             <li class="page-item @if (!Model.Transactions.HasNextPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.NextPage">Next</a>
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.NextPage">Next</a>
             </li>
             <li class="page-item @if (!Model.Transactions.HasNextPage) {<text>disabled</text>}">
-                <a class="page-link" asp-action="MyTransactions" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.TotalPages">Last</a>
+                <a class="page-link" asp-action="GetAll" asp-route-searchString="@Model.SearchString" asp-route-page="@Model.Transactions.TotalPages">Last</a>
             </li>
         </ul>
     </nav>

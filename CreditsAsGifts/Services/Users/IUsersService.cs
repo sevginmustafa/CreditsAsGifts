@@ -16,9 +16,9 @@
 
         public Task<string> GetUserPhoneNumberAsync(string userId);
 
-        public Task<IEnumerable<TransactionViewModel>> GetUserTransactionsAsync(string userId);
+        public Task<IEnumerable<TransactionViewModel>> GetTransactionsAsync(string userId = null);
 
-        public Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(string searchString, string userId);
+        public Task<IEnumerable<TransactionViewModel>> SearchTransactionsByPhoneNumberAsync(string searchString, string userId = null);
 
         public IEnumerable<UserAdministrationViewModel> SearchUsersByPhoneNumber(string searchString);
     }

@@ -37,6 +37,11 @@ namespace CreditsAsGifts.Controllers
         [Authorize]
         public IActionResult Dashboard()
         {
+            if (this.User.IsInRole(AdministratorRoleName))
+            {
+                return this.RedirectToAction("Index", "Dashboard", new { area = "Administration" });
+            }
+
             return this.View();
         }
 

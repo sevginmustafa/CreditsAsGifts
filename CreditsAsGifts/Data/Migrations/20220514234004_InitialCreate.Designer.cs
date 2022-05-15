@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditsAsGifts.Data.Migrations
 {
     [DbContext(typeof(CreditsAsGiftsDbContext))]
-    [Migration("20220512150708_InitialCreate")]
+    [Migration("20220514234004_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -295,6 +295,16 @@ namespace CreditsAsGifts.Data.Migrations
 
                     b.Property<int>("Credits")
                         .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

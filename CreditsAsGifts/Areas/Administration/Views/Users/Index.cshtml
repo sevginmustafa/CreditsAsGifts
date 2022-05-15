@@ -6,8 +6,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="@UserNavPages.GetAllNavClass(ViewContext)"><a asp-controller="Users" asp-action="GetAll">All Users</a></li>
+            <ul class="nav nav-pills flex-column">
+                <li class="@UserNavPages.GetAllNavClass(ViewContext)"><a class="nav-link" asp-controller="Users" asp-action="GetAll">All Users</a></li>
             </ul>
         </div>
     </div>

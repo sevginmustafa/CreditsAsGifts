@@ -2,6 +2,18 @@
 {
     public static class ModelValidation
     {
+        public const string FirstNameDisplayName = "First name";
+        public const string FirstNameRequiredMessage = "First name is required!";
+        public const string FirstNameLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long!";
+        public const int FirstNameMinLength = 2;
+        public const int FirstNameMaxLength = 100;
+
+        public const string LastNameDisplayName = "Last name";
+        public const string LastNameRequiredMessage = "Last name is required!";
+        public const string LastNameLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long!";
+        public const int LastNameMinLength = 2;
+        public const int LastNameMaxLength = 100;
+        
         public const string UsernameDisplayName = "Username";
         public const string UsernameRequiredMessage = "Username is required!";
         public const string UsernameLengthErrorMessage = "The {0} must be at least {2} and at max {1} characters long!";

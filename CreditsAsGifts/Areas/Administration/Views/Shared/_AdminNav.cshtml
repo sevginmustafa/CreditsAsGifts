@@ -1,3 +1,4 @@
-﻿<ul class="nav nav-pills nav-stacked">
-    <li class="@UserNavPages.UserNavClass(ViewContext)"><a asp-area="Administration" asp-controller="Users" asp-action="Index">Users</a></li>
+﻿<ul class="nav nav-pills flex-column">
+    <li class="nav-item"><a class="nav-link @UserNavPages.UserNavClass(ViewContext)" asp-area="Administration" asp-controller="Users" asp-action="Index">Users</a></li>
+    <li class="nav-item"><a class="nav-link @TransactionNavPages.TransactionNavClass(ViewContext)" asp-area="Administration" asp-controller="Transactions" asp-action="Index">Transactions</a></li>
 </ul>

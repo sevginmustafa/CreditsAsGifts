@@ -7,11 +7,11 @@
     {
         public DateTime Date { get; set; }
 
-        public string SenderUserName { get; set; }
+        public string SenderName { get; set; }
 
         public string SenderPhoneNumber { get; set; }
 
-        public string RecipientUserName { get; set; }
+        public string RecipientName { get; set; }
 
         public string RecipientPhoneNumber { get; set; }
 
